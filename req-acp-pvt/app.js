@@ -25,6 +25,8 @@ app.get('', (req, res) => {
   pass = req.query.password;
   reqno = req.query.number;
   force = req.query.code;
+  reqno = reqno / 10;
+  reqno = Math.round(reqno);
 
   (async () => {
     const browser = await puppeteer.launch({
@@ -70,7 +72,7 @@ app.get('', (req, res) => {
 
     console.log('Password Done');
 
-    await sleep(4000);
+    await sleep(1000);
 
     element = await page.$x(
       `//span[@id='react-root']/section/main/div/article/div/div/div/form/div[4]/button/div`
@@ -204,10 +206,10 @@ const puppeteer = require('puppeteer');
 
       try {
         element = await page.$x(`//div[3]/div/div/button`);
-        await element[0].click();
+        // await element[0].click();
         for (step = 2; step < 11; step++) {
           element = await page.$x(`//div[` + step + `]/div[3]/div/div/button`);
-          await element[0].click();
+          // await element[0].click();
           console.log('Step ', step, 'click');
         }
       } catch (e) {
@@ -225,8 +227,10 @@ const puppeteer = require('puppeteer');
       // await element[0].click();
 
       await sleep(4000);
-      element = await page.$x(`//div[3]/div/div[2]/a/span`);
-      await element[0].click();
+      await page.waitForSelector('._47KiJ > .XrOey > ._0ZPOP > ._8-yf5 > path');
+      await page.click('._47KiJ > .XrOey > ._0ZPOP > ._8-yf5 > path');
+      // element = await page.$x(`//div[3]/div/div[2]/a/span`);
+      // await element[0].click();
 
       console.log('Heart Target -2');
     }
