@@ -30,7 +30,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-mongoose.connect('mongodb://chester:qwe123rty@ds145113.mlab.com:45113/iwp', {
+mongoose.connect('mongodb://localhost:27017/IWP', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
